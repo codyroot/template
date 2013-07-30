@@ -31,3 +31,16 @@
 .clearfix {
 	zoom: 1; /* IE < 8 */
 }
+
+/*
+------------------------------------------------- Formulare zurücksetzen
+*/
+
+select:focus, input:focus {
+    outline: none;
+    outline-offset: 0;
+}
+
+input:invalid {
+    box-shadow: none;
+}

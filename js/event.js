@@ -1,43 +1,44 @@
 // Cross Browser Eventhandling
 (function (window, undefined) {
-  var eventUtility = {
-   addEvent : function(el, type, fn) {
-      if (el.addEventListener) {
-        el.addEventListener(type, fn, false);
-      } else if (el.attachEvent) {
-        el.attachEvent("on" + type, fn);
-      } else {
-        el["on" + type] = fn;
-      }
-   },
 
-   //removeEvent : function(el, type, fn) {
-   // if (typeof removeEventListener !== undefined) {
-   //     el.removeEventListener(type, fn, false);
-   //   } else if (typeof detachEvent !== undefined) {
-   //     el.detachEvent("on" + type, fn);
-   //   } else {
-   //     el["on" + type] = null;
-   //   }
-   //},
+    // Implementierung nach Init-Time Branching
+    var eventUtility = {
+        addEvent: null,
+        getTarget: null,
+        keyCode: null,
+        preventDefault: null
+    };
 
-   getTarget : function(event) {
-      if (event.target) {
-        return event.target;
-      } else {
-        return event.srcElement;
-      }
-   },
-   
-   preventDefault : function(event) {
-      if (event.preventDefault) {
-        event.preventDefault();
-      } else {
-        event.returnValue = false;
-      }
+    // Eventschnittstelle
+    if (typeof window.addEventListener === 'function') {
+        eventUtility.addEvent = function (el, type, fn) {
+            el.addEventListener(type, fn, false);
+        };
+        eventUtility.getTarget = function (event) {
+            return event.target;
+        };
+        eventUtility.keyCode = function (event) {
+            return event.keyCode;
+        };
+        eventUtility.preventDefault = function (event) {
+            event.preventDefault();
+        };
+        // IE < 9
+    } else {
+        eventUtility.addEvent = function (el, type, fn) {
+            el.attachEvent('on' + type, fn);
+        };
+        eventUtility.getTarget = function (event) {
+            return event.srcElement;
+        };
+        eventUtility.keyCode = function (event) {
+            return event.charCode;
+        };
+        eventUtility.preventDefault = function (event) {
+            event.returnValue = false;
+        };
     }
-  }
 
-  window.eventUtility = eventUtility;
+    window.eventUtility = eventUtility;
 
 }(window, undefined));
