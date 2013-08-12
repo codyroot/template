@@ -2,16 +2,16 @@
 ------------------------------------------------- RESET CSS
 */
 * {
-	-moz-box-sizing:border-box;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	margin:0;
-	padding:0;
-	border:none;
-	vertical-align:baseline;
-	font-style:inherit;
-	font-size:100%;
-	font-family:inherit;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    vertical-align: baseline;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
 }
 
 /*
@@ -25,11 +25,11 @@
 }
 
 .clearfix:after {
-	clear: both;
+    clear: both;
 }
 
 .clearfix {
-	zoom: 1; /* IE < 8 */
+    zoom: 1; /* IE < 8 */
 }
 
 /*
